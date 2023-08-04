@@ -5,7 +5,7 @@ import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import { Translate } from '@mui/icons-material';
+import { useHistory } from 'react-router-dom';
 
 const SignIn = () => {
   const auth = useAuth();
@@ -13,6 +13,7 @@ const SignIn = () => {
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
   const [password, setPassword] = useState('');
+  const history = useHistory();
 
   const handleSignIn = async (e) => {
     e.preventDefault();
@@ -23,7 +24,7 @@ const SignIn = () => {
       setMessage(signIn.error.message);
     } else {
       setMessage('Login link has been sent.');
-      navigate('favourites');
+      history.push('user')
     }
 
     setEmail('');
