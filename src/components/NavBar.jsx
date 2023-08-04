@@ -37,7 +37,7 @@ export default function NavBar() {
 
         <Navbar.Brand style={navBrandStyling}>
 
-          <img src="src/assets/react.svg" alt="logo" height="40px" width="40px" />
+          <img src="/src/assets/potentiallogo.jpeg" alt="logo" height="40px" width="40px" />
           AtumPod
 
         </Navbar.Brand>
