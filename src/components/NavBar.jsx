@@ -2,6 +2,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Navbar, Nav } from 'react-bootstrap';
 import { useAuth } from '../Auth';
+import Image from '/src/assets/potentiallogo.jpeg';
 import '../App.css';
 
 const navLinkStyling = {
@@ -37,7 +38,7 @@ export default function NavBar() {
 
         <Navbar.Brand style={navBrandStyling}>
 
-          <img src="/src/assets/potentiallogo.jpeg" alt="logo" height="40px" width="40px" />
+          <img src={Image} alt="logo" height="40px" width="40px" />
           AtumPod
 
         </Navbar.Brand>
