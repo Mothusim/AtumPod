@@ -23,7 +23,7 @@ const SignIn = () => {
       setMessage(signIn.error.message);
     } else {
       setMessage('Login link has been sent.');
-      navigate('/favorites');
+      navigate('favourites');
     }
 
     setEmail('');

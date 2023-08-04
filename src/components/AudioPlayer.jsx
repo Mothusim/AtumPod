@@ -1,22 +1,27 @@
-import React, { useEffect } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useAudioPlayer } from './AudiioPlayerContext';
-import supabase from '../supabase'; // Import the Supabase client
+import supabase from '../supabase';
 import { useAuth } from '../Auth';
 
-const AudioPlayer = ({ audioSource }) => {
-  const { isAudioVisible, setIsAudioVisible, currentEpisode, episodeId } = useAudioPlayer();
-  const audioRef = React.createRef();
+const AudioPlayer = ({ audioSource, episodeId }) => {
+  const { isAudioVisible, setIsAudioVisible, currentEpisode } = useAudioPlayer();
+  const audioRef = useRef();
   const auth = useAuth();
+
+  const [currentEpisodeInfo, setCurrentEpisodeInfo] = useState(null);
 
   useEffect(() => {
     if (isAudioVisible) {
       audioRef.current.play();
+
       const handleBeforeUnload = (e) => {
         e.preventDefault();
         e.returnValue = '';
         saveProgress();
       };
+
       window.addEventListener('beforeunload', handleBeforeUnload);
+
       return () => {
         window.removeEventListener('beforeunload', handleBeforeUnload);
       };
@@ -25,15 +30,20 @@ const AudioPlayer = ({ audioSource }) => {
     }
   }, [isAudioVisible]);
 
+  useEffect(() => {
+    // Whenever the currentEpisode changes, update the currentEpisodeInfo
+    setCurrentEpisodeInfo(currentEpisode);
+  }, [currentEpisode]);
+
   const saveProgress = async () => {
-    if (!currentEpisode) return;
+    if (currentEpisodeInfo) return;
 
     try {
       const progress = Math.floor(audioRef.current.currentTime);
       const isCompleted = audioRef.current.currentTime === audioRef.current.duration;
       const { data, error } = await supabase.from('history').upsert({
-        user_id: auth.user.id, 
-        episode_id: episodeId,
+        user_id: auth.user.id,
+        episode_id: episodeId, // Use the title or ID of the episode from currentEpisodeInfo
         timestamp: progress,
         is_completed: isCompleted,
       });

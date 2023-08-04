@@ -19,7 +19,7 @@ const Carousels = () => {
   console.log(datas);
 
   return (
-    <Carousel style={{backgroundColor: '#875b31'}} slidesToShow={3} autoplay={true} speed={100000}  pauseOnHover={true} scrollMode='remainder' withoutControls wrapAround>
+    <Carousel style={{backgroundColor: '#875b31'}} slidesToShow={5} autoplay={true} speed={100000}  pauseOnHover={true} scrollMode='remainder' withoutControls wrapAround>
       <img style={{ width: 300 }} key={1} src={data[0].image} />
       <img style={{ width: 300 }} key={2} src={data[1].image} />
       <img style={{ width: 300 }} key={3} src={data[2].image} />

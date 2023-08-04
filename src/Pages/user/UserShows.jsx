@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom"
 import { useState, useContext, useEffect } from "react"
 import { DataContext } from "../../App";
 import Grid from '@mui/material/Grid'
@@ -142,8 +141,7 @@ export default function UserShows() {
         );
       
     };
-    
-
+  
 
     return (
 
@@ -162,23 +160,11 @@ export default function UserShows() {
 
             <Grid container spacing={5}>
 
-
                 {userShows}
             
-                {/* {
-                    shows.length > 0 ? (
-                       
-                            {userShows}
-                        
-
-                    ) : (
-                            <h2>Loading...</h2>
-                        )
-                } */}
-            
-
             </Grid>
-            </div>
+
+        </div>
         
     )
 }

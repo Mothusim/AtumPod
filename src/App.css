@@ -188,7 +188,7 @@ html{
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    background-color: green;
+    background-color: transparent;
     margin-bottom: 30px;
     padding: 5%;
     row-gap: 20px;
@@ -335,5 +335,22 @@ html{
     text-decoration-line: none;
     text-align: center;
     font-family: 'Nanum Gothic', sans-serif;
+
+}
+
+#sortButtons{
+
+    display: flex;
+    flex-direction: column;
+    row-gap: 5px;
+    margin-bottom: 20px;
+
+    @media(min-width: 700px){
+
+        flex-direction: row;
+        margin-bottom: 10px;
+        column-gap: 5px;
+
+    }
 
 }

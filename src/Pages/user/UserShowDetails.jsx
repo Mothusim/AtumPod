@@ -1,38 +1,44 @@
 import { useParams, Link, NavLink, Outlet } from "react-router-dom"
-import { useState, useEffect, createContext } from "react"
-import UserShowSeasons from './UserShowSeasons'
-
+import { useState, useEffect } from "react"
+import CircularProgress from "@mui/material/CircularProgress"
 
 export default function UserShowDetails() {
 
     const { id } = useParams()
     const [currentShow, setCurrentShow] = useState(null)
 
-    
-
     const activeStyles = {
+
         fontWeight: "bold",
         textDecoration: "underline",
         color: "#161616"
+
     }
 
     
-        useEffect(() => {
+    useEffect(() => {
+
         fetch(`https://podcast-api.netlify.app/id/${id}`)
           .then(response => response.json())
           .then(data => setCurrentShow(data))
           .catch(error => {
             console.error("Error fetching show details:", error);
-            // Handle the error as needed, e.g., show an error message to the user
+            
           });
-      }, [id]);
+
+    }, [id]);
         
       
     if (!currentShow) {
-        return <h1>Loading...</h1>
+
+        return <CircularProgress style={{margin: 'auto'}} />
+
     }
+
     return (
+
         <section>
+
             <Link
                 to=".."
                 relative="path"
@@ -40,20 +46,22 @@ export default function UserShowDetails() {
             >&larr; <span>Back to all shows</span></Link>
 
             <div className="user-show-detail-layout-container">
+
                 <div className="user-show-detail">
+
                     <img src={currentShow.image} />
+                    
                     <div className="user-show-detail-info-text">
-                        <i
-                            className={`user-seasons user-season-${currentShow.seasons.length}`}
-                        >
-                            {currentShow.seasons.length}
-                        </i>
+
                         <h3>{currentShow.title}</h3>
-                        <h4>{currentShow.description}</h4>
+                        <p>{`seasons: ${currentShow.seasons.length}`}</p>
+
                     </div>
+
                 </div>
 
                 <nav className="user-show-detail-nav">
+
                     <NavLink
                         to="."
                         end
@@ -61,6 +69,7 @@ export default function UserShowDetails() {
                     >
                         Details
                     </NavLink>
+
                     <NavLink
                         to="seasons"
                         style={({ isActive }) => isActive ? activeStyles : null}
@@ -69,8 +78,13 @@ export default function UserShowDetails() {
                     </NavLink>
                     
                 </nav>
+
                 <Outlet context={{ currentShow }} />
+
             </div>
+
         </section>
+
     )
+    
 }

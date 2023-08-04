@@ -1,4 +1,3 @@
-import Grid from '@mui/material/Grid'
 import { Link } from 'react-router-dom';
 
 function Card({show}){ 

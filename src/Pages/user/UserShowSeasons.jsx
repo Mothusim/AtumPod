@@ -5,13 +5,11 @@ import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import BasicAccordion from "../../components/Accordion";
 import AudioPlayer from "../../components/AudioPlayer";
 import supabase from '../../supabase';
 import { useAuth } from '/src/Auth.jsx';
 import Favorite from "@mui/icons-material/Favorite";
 import { useAudioPlayer } from "../../components/AudiioPlayerContext";
-import { useLocation } from "react-router-dom";
 
 export default function UserShowInfo() {
     
@@ -21,15 +19,11 @@ export default function UserShowInfo() {
 
     const { isAudioVisible, setIsAudioVisible } = useAudioPlayer();
 
-    const location = useLocation();
-    const isEpisodeDetailsPage = location.pathname.includes('/user/');
-
     const [currentEpisodeIndex, setCurrentEpisodeIndex] = useState(-1);
     const [isEpisodeSelected, setIsEpisodeSelected] = useState(false);
     const [message, setMessage] = useState('');
     const [isFavorite, setIsFavorite] = useState(false);
     const [episodeId, setEpisodeId] = useState()
-    const [sss, setSs] = useState('');
     const [imgs, setImgs] = useState('');
     
 
@@ -65,14 +59,9 @@ export default function UserShowInfo() {
             const episodeDescription = episode.description
             const episodeAudio = episode.file
             const userId = auth.user.id;
-            // const seasonTitle = seasonTitle
             const seasonImage = imgs
 
             const showTitle = currentShow.title
-
-            // console.log(episodeId)
-
-           
 
             const { data: existingFavorites, error: fetchError } = await supabase
 
@@ -136,64 +125,88 @@ export default function UserShowInfo() {
 
     };
 
-    const handlePlay = (index) => {
+    const handlePlay = (index, title) => {
+
         setCurrentEpisodeIndex(index);
         setIsEpisodeSelected(true);
         setIsAudioVisible(true)
-        setEpisodeId(episodeId)
+        setEpisodeId(title);
+
     };
 
     const handleFavourites = (index, seasonTitle, seasonImg) => {
+
         setCurrentEpisodeIndex(index);
         addToFavorites(index, seasonTitle);
-        setSs(seasonTitle)
         setImgs(seasonImg)
         
     };
 
     const ey = currentShow.seasons.map((seas) => {
+
         return (
+
             <Accordion key={seas.title}>
+
                 <AccordionSummary
                     expandIcon={<ExpandMoreIcon />}
                     aria-controls="panel1a-content"
                     id="panel1a-header"
                 >
                     <div style={{ display: 'flex', flexDirection: 'column' }}>
+
                         <Typography component='h1' fontWeight='bold'>{seas.title}</Typography>
                         <Typography component='p'>{`Episodes: ${seas.episodes.length}`}</Typography>
+
                     </div>
+
                 </AccordionSummary>
+
                 <AccordionDetails>
+
                     <ul>
+
                         {seas.episodes.map((episode, episodeIndex) => (
+
                             <div key={episode.title} >
-                                <p onClick={() => handlePlay(episodeIndex)}>{episode.title}</p>
+                            
+                                <p onClick={() => handlePlay(episodeIndex, episode.title)}>{episode.title}</p>
                                 <Favorite onClick={() => handleFavourites(episodeIndex, seas.title, seas.image)} />
+
                             </div>
+
                         ))}
+
                     </ul>
+
                 </AccordionDetails>
+
             </Accordion>
+
         );
+
     });
 
     return (
+
         <>
             <div>{ey}</div>
-            {currentEpisodeIndex !== -1 && currentShow.seasons[0].episodes[currentEpisodeIndex]?.file &&isEpisodeDetailsPage && isAudioVisible && (
+
+            {currentEpisodeIndex !== -1 && currentShow.seasons[0].episodes[currentEpisodeIndex]?.file  && isAudioVisible && (
+
                 <AudioPlayer
+
                     audioSource={currentShow.seasons[0].episodes[currentEpisodeIndex].file}
-                    // episodes={currentShow.seasons[0].episodes}
                     currentEpisode={currentEpisodeIndex}
                     episodeId={episodeId}
-                    // onEpisodeChange={handlePlay}
-                    // currentSeason={currentShow.seasons[0].image}
-                    // isEpisodeSelected={isEpisodeSelected}
-                    // setIsEpisodeSelected={setIsEpisodeSelected}
+
                 />
             )}
+
             <p>{message}</p>
+
         </>
+
     );
+
 }
