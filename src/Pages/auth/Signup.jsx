@@ -7,47 +7,49 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 
-const SignIn = () => {
+const SignUp = () => {
+
   const auth = useAuth();
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSignIn = async (e) => {
+  const handleSignUp = async (e) => {
+
     e.preventDefault();
 
-    const signIn = await auth.login(email, password);
+    const signUp = await auth.signup(email, password); 
 
-    if (signIn.error) {
-      setMessage(signIn.error.message);
+    if (signUp.error) {
+
+      setMessage(signUp.error.message);
     } else {
-      setMessage('Login link has been sent.');
+
+      setMessage('Account created successfully.');
       navigate('/user');
+
     }
 
     setEmail('');
     setPassword('');
-  
-};
+    
+  };
 
   return (
-    <div id='loginstyle'>
-      
-      <h1 style={{textAlign: 'center', paddingTop: '6% ', color: '#57391C'}}>Sign in</h1>
 
+    <div id='signupstyle'>
 
+      <h1 style={{textAlign: 'center', paddingTop: '6% ', color: '#57391C'}}>Sign up</h1>
       <Stack style={{height: '50vh', paddingBottomL: '59%'}}>
-
 
         <Box 
             component="form" 
             noValidate 
-            onSubmit={handleSignIn} 
+            onSubmit={handleSignUp} 
             sx={{ 
                 mt: 1,
                 py: 2,
-               
         }}>
 
           <TextField
@@ -80,6 +82,7 @@ const SignIn = () => {
           type="submit"
           size="medium"
           sx= {{ 
+
               fontSize: '0.9rem',
               textTransform: 'capitalize', 
               py: 2,
@@ -90,12 +93,12 @@ const SignIn = () => {
               "&:hover": {
                   backgroundColor: '#1e2a5a',
               }
-          }}
-          >
-              Submit
+              
+          }}>
+              Sign Up
           </Button>
 
-          <span>Not signed up?<Link replace to={'/signup/'}>SignUp</Link> here!</span>
+          <span>Already signed up?<Link to={'/signin'}>Signin</Link> here!</span>
 
           {message && <p style={{color: 'red', textAlign: 'center'}}>{message}</p>}
 
@@ -109,27 +112,4 @@ const SignIn = () => {
 
 };
 
-export default SignIn;
-
-
-      {/* <form onSubmit={handleSignIn}>
-        <label htmlFor="email">Email:</label>
-        <input
-          type="email"
-          id="email"
-          value={email}
-          placeholder="Enter email..."
-          onChange={(e) => setEmail(e.target.value)}
-        />
-
-        <label htmlFor="password">Password:</label>
-        <input
-          type="password"
-          id="password"
-          value={password}
-          placeholder="Enter password..."
-          onChange={(e) => setPassword(e.target.value)}
-        />
-
-        <button type="submit">Sign In</button>
-      </form> */}
+export default SignUp;

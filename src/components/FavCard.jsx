@@ -24,7 +24,7 @@ function FavCard({ show }) {
             return;
           }
       
-          // Update the state to remove the episode from the list of favorites
+         
           setFavorites((prevFavorites) =>
             prevFavorites.filter((favorite) => favorite.episode_id !== episodeId)
           );
@@ -56,12 +56,12 @@ function FavCard({ show }) {
   };
 
   const contentStyle = {
-    flex: '1 0 auto', // Allow content to grow and take available space
+    flex: '1 0 auto',
     display: 'flex',
-    flexDirection: 'column', // To stack the content elements vertically
-    justifyContent: 'space-between', // To push the delete icon to the bottom
+    flexDirection: 'column',
+    justifyContent: 'space-between', 
     padding: '0px 8px 0px 8px', 
-    marginBottom: '30px',// Adjust the padding between the image and card content
+    marginBottom: '30px',
   };
 
   return (

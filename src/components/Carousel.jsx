@@ -1,20 +1,18 @@
-import React, { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Carousel from "nuka-carousel";
 import { DataContext } from "../App";
 
 const Carousels = () => {
   const { data } = useContext(DataContext);
-
-  // Ensure data is available and has at least 21 elements (indices 0 to 20).
-  if (!data || data.length < 2) {
-    return <div>No data available for carousel.</div>;
-  }
-
   const [datas, setDatas] = useState(data);
 
   useEffect(() => {
     setDatas(data);
   }, [data]);
+
+  if (!data || data.length < 2) {
+    return <div>No data available for carousel.</div>;
+  }
 
   console.log(datas);
 

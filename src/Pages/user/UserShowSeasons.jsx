@@ -8,6 +8,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import AudioPlayer from "../../components/AudioPlayer";
 import supabase from '../../supabase';
 import { useAuth } from '/src/Auth.jsx';
+import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
 import Favorite from "@mui/icons-material/Favorite";
 import { useAudioPlayer } from "../../components/AudiioPlayerContext";
 
@@ -168,10 +169,10 @@ export default function UserShowInfo() {
 
                         {seas.episodes.map((episode, episodeIndex) => (
 
-                            <div key={episode.title} >
+                            <div key={episode.title} style={{ borderTop: '1px solid #ccc' }}>
                             
-                                <p onClick={() => handlePlay(episodeIndex, episode.title)}>{episode.title}</p>
-                                <Favorite onClick={() => handleFavourites(episodeIndex, seas.title, seas.image)} />
+                                <p onClick={() => handlePlay(episodeIndex, episode.title)} style={{cursor: 'pointer'}}>{episode.title} <PlayCircleOutlineIcon /></p>
+                                <Favorite onClick={() => handleFavourites(episodeIndex, seas.title, seas.image)} style={{cursor: 'pointer'}}/>
 
                             </div>
 

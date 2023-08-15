@@ -361,6 +361,7 @@ i[class*='show-type-'] {
     background-color: white;
     padding: 24px;
     margin: 30px 0;
+    height: 50vh;
 }
 
 .user-show-detail {
@@ -421,16 +422,6 @@ i[class*='show-type-'] {
     font-weight: 500;
 }
 
-.user-show-price {
-    font-size: 24px;
-    font-weight: 500;
-}
-
-.user-show-price > span {
-    font-size: 16px;
-    color: #4D4D4D;
-}
-
 .user-show-detail-image {
     height: 100px;
     border-radius: 5px;
@@ -445,7 +436,7 @@ i[class*='show-type-'] {
     background-color: #161616;
     color: white;
 }
-
+/* 
 .login-container {
     display: flex;
     flex-direction: column;
@@ -490,4 +481,4 @@ i[class*='show-type-'] {
     margin-top: 22px;
     color: white;
     font-family: "Inter", sans-serif;
-}
+} */

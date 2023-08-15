@@ -72,11 +72,21 @@ export default function NavBar() {
 
             }
 
-            <Link to={'signin'} style={navLinkStyling} onClick={handleLogout}>
+            {auth.user?
 
-              {auth.user? 'Logout': 'Login'}
+              <Link to={'signin'} style={navLinkStyling} onClick={handleLogout}>
 
-            </Link>
+                {auth.user? 'Logout': 'Login'}
+
+              </Link>:
+
+              <Link to="signup" style={navLinkStyling}>
+                
+               Signup/Signin
+
+              </Link>
+
+            }
 
             {!auth.user?
 

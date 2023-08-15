@@ -11,7 +11,7 @@ import ArrowDropDown from "@mui/icons-material/ArrowDropDown";
 
 export default function UserShows() {
 
-  const { data } = useContext(DataContext);
+  const { data, loading } = useContext(DataContext);
 
     const [sortOrder, setSortOrder] = useState(null);
     const [originalData, setOriginalData] = useState([]);
@@ -149,8 +149,10 @@ export default function UserShows() {
         
             <h1 className="user-shows-title" style={{marginBottom: '5%'}}>Your Shows</h1>
 
-            
+            {loading? <h1>Loading</h1>
 
+            :
+            <>
             <div id='searchDiv' style={{}}>
 
                 <DropdownMenu handleSort={handleSort} sortOrder={sortOrder}/>
@@ -163,6 +165,8 @@ export default function UserShows() {
                 {userShows}
             
             </Grid>
+            </>
+            }
 
         </div>
         

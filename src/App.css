@@ -150,7 +150,7 @@ html{
 
 }
 
-#loginstyle{
+#loginstyle, #signupstyle{
 
     background-image: url('./assets/wave.svg');
     background-repeat: no-repeat;

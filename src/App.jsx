@@ -3,10 +3,10 @@ import UseFetch from './components/UseFetch'
 import './App.css'
 import './index.css'
 import AllShows from './Pages/AllShows'
-import Signin from './Pages/auth/Login'
+import SignIn from './Pages/auth/Login'
 import Favourites from './Pages/Favourites'
 import Welcome from './Pages/Welcome'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route} from 'react-router-dom'
 import Download from './Pages/Download'
 import { AuthProvider } from './Auth'
 import AppLayout from './components/AppLayout'
@@ -17,6 +17,8 @@ import UserShows from './Pages/user/UserShows'
 import UserShowInfo from './Pages/user/UserShowInfo'
 import UserShowDetails from './Pages/user/UserShowDetails'
 import UserShowSeasons from './Pages/user/UserShowSeasons'
+import SignUp from './Pages/auth/Signup'
+
 import Dashboard from './Pages/Dashboard'
 export const DataContext = createContext();
 
@@ -42,7 +44,7 @@ export function App() {
 
     <>
 
-    <DataContext.Provider value={{ data }}>
+    <DataContext.Provider value={{ data, loading }}>
     
       <AuthProvider>
         
@@ -55,7 +57,8 @@ export function App() {
               <Route index element={<Welcome/>} />
               <Route path="about" element={<About />} />
               <Route path="download" element={<Download />} />
-              <Route path='signin' element={<Signin />} />
+              <Route path='signin' element={<SignIn />} />
+              <Route path="signup" element={<SignUp />} />
               <Route path='allshows' element={<AllShows />} />
 
               
